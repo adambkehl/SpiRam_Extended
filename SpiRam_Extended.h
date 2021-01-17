@@ -57,6 +57,7 @@
 // ClockDiv values SPI_CLOCK_DIV(XX) eg. SPI_CLOCK_DIV4
 
 // amount of kiloBIT of the chip
+#define CHIP_23K640 64
 #define CHIP_23K256 256    //default
 #define CHIP_23LC512 512
 #define CHIP_23LCV512 512
