@@ -68,13 +68,17 @@ typedef union {
     float floatNum;
     long longNum;
     int intNum;
-    byte b [sizeof(long)];
-  } myUnion;
+    uint64_t uint64_tNum;
+    uint32_t uint32_tNum;
+    uint16_t uint16_tNum;
+    uint8_t uint8_tNum;
+    byte b [sizeof(uint64_t)];
+} myUnion;
 
 class SpiRAM
 {
   public:
-    SpiRAM(byte clockDiv, byte ssPin, int chiptype=CHIP_23K256);
+    SpiRAM(byte clockDiv, byte ssPin, int chiptype=CHIP_23K640);
     void enable();
     void disable();
     char read_byte(long address);
@@ -84,7 +88,7 @@ class SpiRAM
     void read_stream(long address, char *buffer, long length);
     void write_stream(long address, char *buffer, long length);
     void run_stream(long address, long length);
-    void stream_run(char data_byte,long index); //if used, MUST be part of main program
+    void stream_run(char data_byte, long index); //if used, MUST be part of main program
     int read_int(long address);
     int write_int(long address, int data_int);
     long read_long(long address);
@@ -97,6 +101,8 @@ class SpiRAM
     void write_longs(long address,long *data_long, long length);
     void read_floats(long address,float *data_long, long length);
     void write_floats(long address,float *data_long, long length);
+    uint64_t read_uint64_t(long address);
+    uint64_t write_uint64_t(long address, uint64_t data_int);
 
 
   private:
