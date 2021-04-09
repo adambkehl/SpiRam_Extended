@@ -104,8 +104,11 @@ class SpiRAM
     uint64_t read_uint64_t(long address);
     uint64_t write_uint64_t(long address, uint64_t data_int);
 
-
-  private:
+    uint16_t read_uint16_t(long address);
+    uint16_t write_uint16_t(long address, uint16_t data);
+    uint8_t read_uint8_t(long address);
+    uint8_t write_uint8_t(long address, uint8_t data);
+private:
     char _current_mode;
     byte _ssPin;
     int  _chiptype;

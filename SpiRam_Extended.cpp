@@ -186,6 +186,40 @@ long SpiRAM::read_long(long address) {
 
 }
 
+uint8_t SpiRAM::write_uint8_t(long address, uint8_t data) {
+    dataUnion.uint8_tNum = data;
+    _prepare(STREAM_MODE, WRITE, address);
+    SPI.transfer(dataUnion.b[0]);
+    disable();
+
+    return data;
+}
+
+uint8_t SpiRAM::read_uint8_t(long address) {
+    _prepare(STREAM_MODE, READ, address);
+    dataUnion.b[0] = SPI.transfer(0xFF);
+    disable();
+    return dataUnion.uint8_tNum;
+}
+
+uint16_t SpiRAM::write_uint16_t(long address, uint16_t data) {
+    dataUnion.uint16_tNum = data;
+    _prepare(STREAM_MODE, WRITE, address);
+    SPI.transfer(dataUnion.b[0]);
+    SPI.transfer(dataUnion.b[1]);
+    disable();
+
+    return data;
+}
+
+uint16_t SpiRAM::read_uint16_t(long address) {
+    _prepare(STREAM_MODE, READ, address);
+    dataUnion.b[0] = SPI.transfer(0xFF);
+    dataUnion.b[1] = SPI.transfer(0xFF);
+    disable();
+    return dataUnion.uint16_tNum;
+}
+
 uint64_t SpiRAM::write_uint64_t(long address, uint64_t data) {
     dataUnion.uint64_tNum = data;
     _prepare(STREAM_MODE, WRITE, address);
